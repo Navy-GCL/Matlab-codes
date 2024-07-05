@@ -1,0 +1,1057 @@
+Matlab常用命令大全
+一、常用对象操作：除了一般windows窗口的常用功能键外。
+1、!dir 可以查看当前工作目录的文件。   !dir& 可以在dos状态下查看。
+2、who  可以查看当前工作空间变量名，    whos 可以查看变量名细节。
+3、功能键：
+功能键             快捷键           说明
+方向上键           Ctrl+P          返回前一行输入
+方向下键           Ctrl+N          返回下一行输入
+方向左键           Ctrl+B          光标向后移一个字符
+方向右键           Ctrl+F          光标向前移一个字符
+Ctrl+方向右键      Ctrl+R          光标向右移一个字符
+Ctrl+方向左键      Ctrl+L          光标向左移一个字符
+home              Ctrl+A          光标移到行首
+End               Ctrl+E          光标移到行尾
+Esc               Ctrl+U          清除一行
+Del               Ctrl+D          清除光标所在的字符
+Backspace         Ctrl+H          删除光标前一个字符                             
+ Ctrl+K          删除到行尾          
+ Ctrl+C          中断正在执行的命令
+4、clc可以命令窗口显示的内容，但并不清除工作空间。
+二、函数及运算
+1、运算符：
+＋：加，  －：减，  *：乘，  /： 除， \：左除  ^：幂，‘：复数的共轭转置， （）：制定运算顺序。
+2、常用函数表：
+sin( )   正弦（变量为弧度）   
+Cot( )   余切（变量为弧度）
+sind( )  正弦（变量为度数）  
+Cotd( )  余切（变量为度数）
+asin( )  反正弦（返回弧度）     
+acot( )  反余切（返回弧度）    
+Asind( ) 反正弦（返回度数）    
+acotd( ) 反余切（返回度数）    
+cos( )   余弦（变量为弧度）     
+exp( )   指数     
+cosd( )  余弦（变量为度数）   
+log( )   对数   
+acos( )  余正弦（返回弧度）   
+log10( ) 以10为底对数
+acosd( ) 余正弦（返回度数）     
+sqrt( )  开方       
+tan( )   正切（变量为弧度）      
+realsqrt( ) 返回非负根
+tand( )  正切（变量为度数）        
+abs( )   取绝对值   
+atan( )  反正切（返回弧度）     
+angle( ) 返回复数的相位角
+atand( ) 反正切（返回度数）        
+mod(x,y) 返回x/y的余数   
+sum(  )  向量元素求和
+3、其余函数可以用help elfun和help specfun命令获得。
+4、常用常数的值：
+pi            3.1415926…….         
+realmin       最小浮点数，2^-1022
+i             虚数单位              
+realmax       最大浮点数，（2－eps）2^1022
+j             虚数单位           
+Inf           无限值
+eps           浮点相对经度＝2^-52           
+NaN           空值
+三、数组和矩阵：
+1、构造数组的方法：增量发和linspace(first,last,num)first和last为起始和终止数，num为需要的数组元素个数。
+2、构造矩阵的方法：可以直接用[ ]来输入数组，也可以用以下提供的函数来生成矩阵。
+ones( )   创建一个所有元素都为1的矩阵，其中可以制定维数，1，2….个变量
+zeros()   创建一个所有元素都为0的矩阵
+eye()     创建对角元素为1，其他元素为0的矩阵
+diag()    根据向量创建对角矩阵，即以向量的元素为对角元素
+magic()   创建魔方矩阵
+rand()    创建随机矩阵，服从均匀分布
+randn()   创建随机矩阵，服从正态分布
+randperm()         创建随机行向量
+horcat             C=[A,B]，水平聚合矩阵，还可以用cat(1,A,B)
+vercat             C=[A;B]，垂直聚合矩阵, 还可以用cat(2,A,B)
+repmat(M,v,h)      将矩阵M在垂直方向上聚合v次，在水平方向上聚合h次
+blkdiag（A，B）     以A，和B为块创建块对角矩阵
+length             返回矩阵最长维的的长度
+ndims              返回维数
+numel              返回矩阵元素个数
+size               返回每一维的长度，[rows,cols]=size(A)
+reshape            重塑矩阵，reshape(A,2,6),将A变为2×6的矩阵，按列排列。
+rot90              旋转矩阵90度，逆时针方向
+fliplr             沿垂轴翻转矩阵
+flipud             沿水平轴翻转矩阵
+transpose          沿主对角线翻转矩阵
+ctranspose         转置矩阵，也可用A’或A.’，这仅当矩阵为复数矩阵时才有区别
+inv                矩阵的逆
+det                矩阵的行列式值
+trace              矩阵对角元素的和
+norm               矩阵或矢量的范数，norm（a，1），norm（a，Inf）…….
+normest            估计矩阵的最大范数矢量
+chol               矩阵的cholesky分解
+cholinc            不完全cholesky分解
+lu                 LU分解
+luinc              不完全LU分解
+qr                 正交分解
+kron（A，B）      A为m×n，B为p×q，则生成mp×nq的矩阵，A的每一个元素都会乘上B，并占据p×q大小的空间
+rank               求出矩阵的刺
+pinv               求伪逆矩阵
+A^p               对A进行操作
+A.^P              对A中的每一个元素进行操作
+四、数值计算
+1、线性方程组求解
+（1）AX=B的解可以用X＝A\B求。XA=B的解可以用X= A/B求。如果A是m×n的矩阵，当m＝n时可以找到唯一解，m<n，不定解，解中至多有m个非零元素。如果m>n，超定系统，至少找到一组解。如果A是奇异的，且AX=B有解，可以用X＝pinv（A）×B返回最小二乘解
+（2）AX=b,  A＝L×U，[L,U]=lu(A),  X=UL\b),即用LU分解求解。 
+（3）QR（正交）分解是将一矩阵表示为一正交矩阵和一上三角矩阵之积，A＝Q×R[Q,R]=chol(A),  X=Q\(U\b) 
+（4）cholesky分解类似。 
+2、特征值 
+D＝eig（A）返回A的所有特征值组成的矩阵。[V,D]=eig(A),还返回特征向量矩阵。 
+3、A＝U×S×UT，[U,S]=schur(A).其中S的对角线元素为A的特征值。 
+4、多项式Matlab里面的多项式是以向量来表示的，其具体操作函数如下： 
+conv           多项式的乘法 
+deconv         多项式的除法，【a，b】＝deconv（s），返回商和余数 
+poly           求多项式的系数（由已知根求多项式的系数） 
+polyeig        求多项式的特征值 
+Polyfit（x，y，n）        多项式的曲线拟合，x，y为被拟合的向量，n为拟合多项式阶数。 
+polyder        求多项式的一阶导数，polyder（a，b）返回ab的导数 
+[a,b]＝polyder（a，b）返回a/b的导数。 
+polyint        多项式的积分 
+polyval        求多项式的值 
+polyvalm       以矩阵为变量求多项式的值 
+residue        部分分式展开式 
+roots          求多项式的根（返回所有根组成的向量） 
+注：用ploy（A）求出矩阵的特征多项式，然后再求其根，即为矩阵的特征值。 
+5、插值常用的插值函数如下： 
+griddata       数据网格化合曲面拟合 
+Griddata3      三维数据网格化合超曲面拟合 
+interp1        一维插值（yi=interp1(x,y,xi,’method’)Method=nearest/linear/spline/pchip/cubic 
+Interp2        二维插值zi=interp1(x,y,z,xi,yi’method’),bilinear 
+Interp3        三维插值 
+interpft       用快速傅立叶变换进行一维插值，help fft。 
+mkpp           使用分段多项式 
+spline         三次样条插值 
+pchip          分段hermit插值 
+6、函数最值的求解 
+fminbnd（‘f’，x1，x2，optiset（,））求f在 x1和x2之间的最小值。Optiset选项可以有‘Display’+‘iter’/’off’/’final’,分别表示显示计算过程/不显示/只显示最后结果。fminsearch求多元函数的最小值。fzero（‘f’，x1）求一元函数的零点。X1为起始点。同样可以用上面的选项。 
+五、图像绘制： 
+1、基本绘图函数 
+plot            绘制二维线性图形和两个坐标轴 
+plot3           绘制三维线性图形和两个坐标轴 
+fplot           在制定区间绘制某函数的图像。fplot（‘f’，区域，线型，颜色） 
+loglog          绘制对数图形及两个坐标轴（两个坐标都为对数坐标）
+semilogx        绘制半对数坐标图形 
+semilogy        绘制半对数坐标图形 
+subplot 绘制子图
+figure() 创建一个图的窗口
+titel 图的标题
+xlabel x坐标
+ylabel y坐标
+grid 图显示网格
+hold 保持当前图形
+clf 清除图形和属性
+mesh 三维网线图
+plot3 三维图形
+surf 三维表面图
+2、线型：   颜色           线型 
+        y   黄色       .  圆点线           v       向下箭头 
+        g   绿色       -.   组合           >    向右箭头 
+        b   蓝色       +    点为加号形      <      向左箭头 
+        m   红紫色     o    空心圆形        p      五角星形 
+        c   蓝紫色     *    星号           h        六角星形 
+        w   白色       .    实心小点       hold on   添加图形 
+        r   红色       x   叉号形状        grid on  添加网格 
+        k   黑色       s   方形             -    实线        
+        d   菱形       --   虚线           ^ 向上箭头      
+3、可以用subplot（3，3，1）表示将绘图区域分为三行三列，目前使用第一区域。此时如要画不同的图形在一个窗口里，需要hold on。   
+=================================================================     
+附录1.1 管理用命令 
+函数名    功能描述    函数名    功能描述 
+addpath    增加一条搜索路径    rmpath    删除一条搜索路径 
+demo    运行Matlab演示程序    type    列出.M文件 
+doc    装入超文本文档    version    显示Matlab的版本号 
+help    启动联机帮助    what    列出当前目录下的有关文件 
+lasterr    显示最后一条信息    whatsnew    显示Matlab的新特性 
+lookfor    搜索关键词的帮助    which    造出函数与文件所在的目录 
+path    设置或查询Matlab路径             
+附录1.2 管理变量与工作空间用命令  
+函数名    功能描述    函数名    功能描述 
+clear    删除内存中的变量与函数    pack    整理工作空间内存 
+disp    显示矩阵与文本    save    将工作空间中的变量存盘 
+length    查询向量的维数    size    查询矩阵的维数 
+load    从文件中装入数据    who,whos    列出工作空间中的变量名   
+附录1.3 文件与操作系统处理命令  
+函数名    功能描述    函数名    功能描述 
+cd    改变当前工作目录    edit    编辑.M文件 
+delete    删除文件    matlabroot    获得Matlab的安装根目录 
+diary    将Matlab运行命令存盘    tempdir    获得系统的缓存目录 
+dir    列出当前目录的内容    tempname    获得一个缓存(temp)文件 
+!    执行操作系统命令             
+附录1.4 窗口控制命令  
+函数名    功能描述    函数名    功能描述 
+echo    显示文件中的Matlab中的命令    more    控制命令窗口的输出页面 
+format    设置输出格式             
+附录1.5 启动与退出命令  
+函数名    功能描述    函数名    功能描述 
+matlabrc    启动主程序    quit    退出Matlab环境 
+startup    Matlab自启动程序             
+附录2  运算符号与特殊字符附录 
+2.1运算符号与特殊字符 
+函数名    功能描述    函数名    功能描述 
++    加    ...    续行标志 
+-    减    ,    分行符(该行结果不显示) 
+*    矩阵乘    ;    分行符(该行结果显示) 
+.*    向量乘    %    注释标志 
+^    矩阵乘方    !    操作系统命令提示符 
+.^    向量乘方        ‘  矩阵转置 
+kron    矩阵kron积    .    向量转置 
+\    矩阵左除    =    赋值运算 
+/    矩阵右除    ==    关系运算之相等 
+.\    向量左除    ~=    关系运算之不等 
+./    向量右除    <    关系运算之小于 
+:    向量生成或子阵提取    <=    关系运算之小于等于 
+()    下标运算或参数定义    >    关系运算之大于 
+[]    矩阵生成    >=    关系运算之大于等于 
+{}         &    逻辑运算之与 
+.    结构字段获取符    |    逻辑运算之或 
+.    点乘运算,常与其他运算符联合使用(如.    ~    逻辑运算之非
+xor    逻辑运算之异成          
+
+
+
+
+附录2.2逻辑函数 
+函数名    功能描述    函数名    功能描述
+all    测试向量中所用元素是否为真    is*(一类函数)    检测向量状态.其中*表示一个确定的函数(isinf)
+any    测试向量中是否有真元素    *isa    检测对象是否为某一个类的对象
+exist    检验变量或文件是否定义    logical    将数字量转化为逻辑量
+find    查找非零元素的下标          
+附录3 语言结构与调试
+附录3.1 编程语言 
+函数名    功能描述    函数名    功能描述
+builtin    执行Matlab内建的函数    global    定义全局变量
+eval    执行Matlab语句构成的字符串    nargchk    函数输入输出参数个数检验
+feval    执行字符串指定的文件    script    Matlab语句及文件信息
+function    Matlab函数定义关键词          
+
+
+附录3.2 控制流程 
+函数名    功能描述    函数名    功能描述
+break    中断循环执行的语句    if    条件转移语句
+case    与switch结合实现多路转移    otherwise    多路转移中的缺省执行部分
+else    与if一起使用的转移语句    return    返回调用函数
+elseif    与if一起使用的转移语句    switch    与case结合实现多路转移
+end    结束控制语句块    warning    显示警告信息
+error    显示错误信息    while    循环语句
+for    循环语句          
+
+
+附录3.3 交互输入 
+函数名    功能描述    函数名    功能描述
+input    请求输入    menu    菜单生成
+keyboard    启动键盘管理    pause    暂停执行
+
+
+附录3.4 面向对象编程 
+函数名    功能描述    函数名    功能描述
+class    生成对象    isa    判断对象是否属于某一类
+double    转换成双精度型    superiorto    建立类的层次关系
+inferiorto    建立类的层次关系    unit8    转换成8字节的无符号整数
+inline    建立一个内嵌对象          
+
+
+附录3.5 调试 
+函数名    功能描述    函数名    功能描述
+dbclear    清除调试断点    dbstatus    列出所有断点情况
+dbcont    调试继续执行    dbstep    单步执行
+dbdown    改变局部工作空间内存    dbstop    设置调试断点
+dbmex    启动对Mex文件的调试    sbtype    列出带命令行标号的.M文件
+dbquit    退出调试模式    dbup    改变局部工作空间内容
+dbstack    列出函数调用关系          
+
+
+附录4 基本矩阵与矩阵处理
+附录4.1 基本矩阵 
+函数名    功能描述    函数名    功能描述
+eye    产生单位阵    rand    产生随机分布矩阵
+linspace    构造线性分布的向量    randn    产生正态分布矩阵
+logspace    构造等对数分布的向量    zeros    产生零矩阵
+ones    产生元素全部为1的矩阵    :    产生向量
+
+
+附录4.2 特殊向量与常量 
+函数名    功能描述    函数名    功能描述
+ans    缺省的计算结果变量    non    非数值常量常由0/0或Inf/Inf获得
+computer    运行Matlab的机器类型    nargin    函数中参数输入个数
+eps    精度容许误差(无穷小)    nargout    函数中输出变量个数
+flops    浮点运算计数    pi    圆周率
+i    复数单元    realmax    最大浮点数值
+inf    无穷大    realmin    最小浮点数值
+inputname    输入参数名    varargin    函数中输入的可选参数
+j    复数单元    varargout    函数中输出的可选参数
+
+
+附录4.3 时间与日期 
+函数名    功能描述    函数名    功能描述
+calender    日历    eomday    计算月末
+clock    时钟    etime    所用时间函数
+cputime    所用的CPU时间    now    当前日期与时间
+date    日期    tic    启动秒表计时器
+datenum    日期(数字串格式)    toc    读取秒表计时器
+datestr    日期(字符串格式)    weekday    星期函数
+datevoc    日期(年月日分立格式)          
+
+
+附录4.4 矩阵处理 
+函数名    功能描述    函数名    功能描述
+cat    向量连接    reshape    改变矩阵行列个数
+diag    建立对角矩阵或获取对角向量    rot90    将矩阵旋转90度
+fliplr    按左右方向翻转矩阵元素    tril    取矩阵的下三角部分
+flipud    按上下方向翻转矩阵元素    triu    取矩阵的上三角部分
+repmat    复制并排列矩阵函数          
+
+
+附录5 特殊矩阵 
+函数名    功能描述    函数名    功能描述
+compan    生成伴随矩阵    invhilb    生成逆hilbert矩阵
+gallery    生成一些小的测试矩阵    magic    生成magic矩阵
+hadamard    生成hadamard矩阵    pascal    生成pascal矩阵
+hankel    生成hankel矩阵    toeplitz    生成toeplitz矩阵
+hilb    生成hilbert矩阵    wilkinson    生成wilkinson特征值测试矩阵
+
+
+附录6 数学函数
+附录6.1 三角函数 
+函数名    功能描述    函数名    功能描述
+sin/asin    正弦/反正弦函数    sec/asec    正割/反正割函数
+sinh/asinh    双曲正弦/反双曲正弦函数    sech/asech    双曲正割/反双曲正割函数
+cos/acos    余弦/反余弦函数    csc/acsc    余割/反余割函数
+cosh/acosh    双曲余弦/反双曲余弦函数    csch/acsch    双曲余割/反双曲余割函数
+tan/atan    正切/反正切函数    cot/acot    余切/反余切函数
+tanh/atanh    双曲正切/反双曲正切函数    coth/acoth    双曲余切/反双曲余切函数
+atan2    四个象限内反正切函数          
+
+
+附录6.2指数函数 
+函数名    功能描述    函数名    功能描述
+exp    指数函数    log10    常用对数函数
+log    自然对数函数    sqrt    平方根函数
+
+
+附录6.3复数函数 
+函数名    功能描述    函数名    功能描述
+abs    绝对值函数    imag    求虚部函数
+angle    角相位函数    real    求实部函数
+conj    共轭复数函数          
+
+
+附录6.4数值处理 
+函数名    功能描述    函数名    功能描述
+fix    沿零方向取整    round    舍入取整
+floor    沿-∞方向取整    rem    求除法的余数
+ceil    沿+∞方向取整    sign    符号函数
+
+
+附录6.5其他特殊数学函数 
+函数名    功能描述    函数名    功能描述
+airy    airy函数    erfcx    比例互补误差函数
+besselh    bessel函数(hankel函数)    erfinv    逆误差函数
+bessili    改进的第一类bessel函数    expint    指数积分函数
+besselk    改进的第二类bessel函数    gamma    gamma函数
+besselj    第一类bessel函数    gammainc    非完全gamma函数
+bessely    第二类bessel函数    gammaln    gamma对数函数
+beta    beta函数    gcd    最大公约数
+betainc    非完全的beta函数    lcm    最小公倍数
+betaln    beta对数函数    log2    分割浮点数
+elipj    Jacobi椭圆函数    legendre    legendre伴随函数
+ellipke    完全椭圆积分    pow2    基2标量浮点数
+erf    误差函数    rat    有理逼近
+erfc    互补误差函数    rats    有理输出
+================================================================
+按字母表索引
+A a 
+abs 绝对值、模、字符的ASCII码值 
+acos 反余弦 
+acosh 反双曲余弦 
+acot 反余切 
+acoth 反双曲余切 
+acsc 反余割 
+acsch 反双曲余割 
+align 启动图形对象几何位置排列工具 
+all 所有元素非零为真 
+angle 相角 
+ans 表达式计算结果的缺省变量名 
+any 所有元素非全零为真 
+area 面域图 
+argnames 函数M文件宗量名 
+asec 反正割 
+asech 反双曲正割 
+asin 反正弦 
+asinh 反双曲正弦 
+assignin 向变量赋值 
+atan 反正切 
+atan2 四象限反正切 
+atanh 反双曲正切 
+autumn 红黄调秋色图阵 
+axes 创建轴对象的低层指令 
+axis 控制轴刻度和风格的高层指令 
+
+
+B b 
+bar 二维直方图 
+bar3 三维直方图 
+bar3h 三维水平直方图 
+barh 二维水平直方图 
+base2dec X进制转换为十进制 
+bin2dec 二进制转换为十进制 
+blanks 创建空格串 
+bone 蓝色调黑白色图阵 
+box 框状坐标轴 
+break while 或for 环中断指令 
+brighten 亮度控制 
+
+
+C c 
+capture （3版以前）捕获当前图形 
+cart2pol 直角坐标变为极或柱坐标 
+cart2sph 直角坐标变为球坐标 
+cat 串接成高维数组 
+caxis 色标尺刻度 
+cd 指定当前目录 
+cdedit 启动用户菜单、控件回调函数设计工具 
+cdf2rdf 复数特征值对角阵转为实数块对角阵 
+ceil 向正无穷取整 
+cell 创建元胞数组 
+cell2struct 元胞数组转换为构架数组 
+celldisp 显示元胞数组内容 
+cellplot 元胞数组内部结构图示 
+char 把数值、符号、内联类转换为字符对象 
+chi2cdf 分布累计概率函数 
+chi2inv 分布逆累计概率函数 
+chi2pdf 分布概率密度函数 
+chi2rnd 分布随机数发生器 
+chol Cholesky分解 
+clabel 等位线标识 
+cla 清除当前轴 
+class 获知对象类别或创建对象 
+clc 清除指令窗 
+clear 清除内存变量和函数 
+clf 清除图对象 
+clock 时钟 
+colorcube 三浓淡多彩交叉色图矩阵 
+colordef 设置色彩缺省值 
+colormap 色图 
+colspace 列空间的基 
+close 关闭指定窗口 
+colperm 列排序置换向量 
+comet 彗星状轨迹图 
+comet3 三维彗星轨迹图 
+compass 射线图 
+compose 求复合函数 
+cond （逆）条件数 
+condeig 计算特征值、特征向量同时给出条件数 
+condest 范 -1条件数估计 
+conj 复数共轭 
+contour 等位线 
+contourf 填色等位线 
+contour3 三维等位线 
+contourslice 四维切片等位线图 
+conv 多项式乘、卷积 
+cool 青紫调冷色图 
+copper 古铜调色图 
+cos 余弦 
+cosh 双曲余弦 
+cot 余切 
+coth 双曲余切 
+cplxpair 复数共轭成对排列 
+csc 余割 
+csch 双曲余割 
+cumsum 元素累计和 
+cumtrapz 累计梯形积分 
+cylinder 创建圆柱 
+
+
+D d 
+dblquad 二重数值积分 
+deal 分配宗量 
+deblank 删去串尾部的空格符 
+dec2base 十进制转换为X进制 
+dec2bin 十进制转换为二进制 
+dec2hex 十进制转换为十六进制 
+deconv 多项式除、解卷 
+delaunay Delaunay 三角剖分 
+del2 离散Laplacian差分 
+demo Matlab演示 
+det 行列式 
+diag 矩阵对角元素提取、创建对角阵 
+diary Matlab指令窗文本内容记录 
+diff 数值差分、符号微分 
+digits 符号计算中设置符号数值的精度 
+dir 目录列表 
+disp 显示数组 
+display 显示对象内容的重载函数 
+dlinmod 离散系统的线性化模型 
+dmperm 矩阵Dulmage-Mendelsohn 分解 
+dos 执行DOS 指令并返回结果 
+double 把其他类型对象转换为双精度数值 
+drawnow 更新事件队列强迫Matlab刷新屏幕 
+dsolve 符号计算解微分方程 
+
+
+
+
+E e 
+echo M文件被执行指令的显示 
+edit 启动M文件编辑器 
+eig 求特征值和特征向量 
+eigs 求指定的几个特征值 
+end 控制流FOR等结构体的结尾元素下标 
+eps 浮点相对精度 
+error 显示出错信息并中断执行 
+errortrap 错误发生后程序是否继续执行的控制 
+erf 误差函数 
+erfc 误差补函数 
+erfcx 刻度误差补函数 
+erfinv 逆误差函数 
+errorbar 带误差限的曲线图 
+etreeplot 画消去树 
+eval 串演算指令 
+evalin 跨空间串演算指令 
+exist 检查变量或函数是否已定义 
+exit 退出Matlab环境 
+exp 指数函数 
+expand 符号计算中的展开操作 
+expint 指数积分函数 
+expm 常用矩阵指数函数 
+expm1 Pade法求矩阵指数 
+expm2 Taylor法求矩阵指数 
+expm3 特征值分解法求矩阵指数 
+eye 单位阵 
+ezcontour 画等位线的简捷指令 
+ezcontourf 画填色等位线的简捷指令 
+ezgraph3 画表面图的通用简捷指令 
+ezmesh 画网线图的简捷指令 
+ezmeshc 画带等位线的网线图的简捷指令 
+ezplot 画二维曲线的简捷指令 
+ezplot3 画三维曲线的简捷指令 
+ezpolar 画极坐标图的简捷指令 
+ezsurf 画表面图的简捷指令 
+ezsurfc 画带等位线的表面图的简捷指令 
+
+
+
+
+F f 
+factor 符号计算的因式分解 
+feather 羽毛图 
+feedback 反馈连接 
+feval 执行由串指定的函数 
+fft 离散Fourier变换 
+fft2 二维离散Fourier变换 
+fftn 高维离散Fourier变换 
+fftshift 直流分量对中的谱 
+fieldnames 构架域名 
+figure 创建图形窗 
+fill3 三维多边形填色图 
+find 寻找非零元素下标 
+findobj 寻找具有指定属性的对象图柄 
+findstr 寻找短串的起始字符下标 
+findsym 机器确定内存中的符号变量 
+finverse 符号计算中求反函数 
+fix 向零取整 
+flag 红白蓝黑交错色图阵 
+fliplr 矩阵的左右翻转 
+flipud 矩阵的上下翻转 
+flipdim 矩阵沿指定维翻转 
+floor 向负无穷取整 
+flops 浮点运算次数 
+flow Matlab提供的演示数据 
+fmin 求单变量非线性函数极小值点（旧版） 
+fminbnd 求单变量非线性函数极小值点 
+fmins 单纯形法求多变量函数极小值点（旧版） 
+fminunc 拟牛顿法求多变量函数极小值点 
+fminsearch 单纯形法求多变量函数极小值点 
+fnder 对样条函数求导 
+fnint 利用样条函数求积分 
+fnval 计算样条函数区间内任意一点的值 
+fnplt 绘制样条函数图形 
+fopen 打开外部文件 
+for 构成for环用 
+format 设置输出格式 
+fourier Fourier 变换 
+fplot 返函绘图指令 
+fprintf 设置显示格式 
+fread 从文件读二进制数据 
+fsolve 求多元函数的零点 
+full 把稀疏矩阵转换为非稀疏阵 
+funm 计算一般矩阵函数 
+funtool 函数计算器图形用户界面 
+fzero 求单变量非线性函数的零点
+G g 
+
+
+
+
+gamma 函数 
+gammainc 不完全 函数 
+gammaln 函数的对数 
+gca 获得当前轴句柄 
+gcbo 获得正执行"回调"的对象句柄 
+gcf 获得当前图对象句柄 
+gco 获得当前对象句柄 
+geomean 几何平均值 
+get 获知对象属性 
+getfield 获知构架数组的域 
+getframe 获取影片的帧画面 
+ginput 从图形窗获取数据 
+global 定义全局变量 
+gplot 依图论法则画图 
+gradient 近似梯度 
+gray 黑白灰度 
+grid 画分格线 
+griddata 规则化数据和曲面拟合 
+gtext 由鼠标放置注释文字 
+guide 启动图形用户界面交互设计工具 
+
+
+
+
+H h 
+harmmean 调和平均值 
+help 在线帮助 
+helpwin 交互式在线帮助 
+helpdesk 打开超文本形式用户指南 
+hex2dec 十六进制转换为十进制 
+hex2num 十六进制转换为浮点数 
+hidden 透视和消隐开关 
+hilb Hilbert矩阵 
+hist 频数计算或频数直方图 
+histc 端点定位频数直方图 
+histfit 带正态拟合的频数直方图 
+hold 当前图上重画的切换开关 
+horner 分解成嵌套形式 
+hot 黑红黄白色图 
+hsv 饱和色图 
+
+
+
+
+I i 
+if-else-elseif 条件分支结构 
+ifft 离散Fourier反变换 
+ifft2 二维离散Fourier反变换 
+ifftn 高维离散Fourier反变换 
+ifftshift 直流分量对中的谱的反操作 
+ifourier Fourier反变换 
+i, j 缺省的"虚单元"变量 
+ilaplace Laplace反变换 
+imag 复数虚部 
+image 显示图象 
+imagesc 显示亮度图象 
+imfinfo 获取图形文件信息 
+imread 从文件读取图象 
+imwrite 把图象写成文件 
+ind2sub 单下标转变为多下标 
+inf 无穷大 
+info MathWorks公司网点地址 
+inline 构造内联函数对象 
+inmem 列出内存中的函数名 
+input 提示用户输入 
+inputname 输入宗量名 
+int 符号积分 
+int2str 把整数数组转换为串数组 
+interp1 一维插值 
+interp2 二维插值 
+interp3 三维插值 
+interpn N维插值 
+interpft 利用FFT插值 
+intro Matlab自带的入门引导 
+inv 求矩阵逆 
+invhilb Hilbert矩阵的准确逆 
+ipermute 广义反转置 
+isa 检测是否给定类的对象 
+ischar 若是字符串则为真 
+isequal 若两数组相同则为真 
+isempty 若是空阵则为真 
+isfinite 若全部元素都有限则为真 
+isfield 若是构架域则为真 
+isglobal 若是全局变量则为真 
+ishandle 若是图形句柄则为真 
+ishold 若当前图形处于保留状态则为真 
+isieee 若计算机执行IEEE规则则为真 
+isinf 若是无穷数据则为真 
+isletter 若是英文字母则为真 
+islogical 若是逻辑数组则为真 
+ismember 检查是否属于指定集 
+isnan 若是非数则为真 
+isnumeric 若是数值数组则为真 
+isobject 若是对象则为真 
+isprime 若是质数则为真 
+isreal 若是实数则为真 
+isspace 若是空格则为真 
+issparse 若是稀疏矩阵则为真 
+isstruct 若是构架则为真 
+isstudent 若是Matlab学生版则为真 
+iztrans 符号计算Z反变换 
+
+
+
+
+J j , K k 
+jacobian 符号计算中求Jacobian 矩阵 
+jet 蓝头红尾饱和色 
+jordan 符号计算中获得 Jordan标准型 
+keyboard 键盘获得控制权 
+kron Kronecker乘法规则产生的数组 
+
+
+
+
+L l 
+laplace Laplace变换 
+lasterr 显示最新出错信息 
+lastwarn 显示最新警告信息 
+leastsq 解非线性最小二乘问题（旧版） 
+legend 图形图例 
+lighting 照明模式 
+line 创建线对象 
+lines 采用plot 画线色 
+linmod 获连续系统的线性化模型 
+linmod2 获连续系统的线性化精良模型 
+linspace 线性等分向量 
+ln 矩阵自然对数 
+load 从MAT文件读取变量 
+log 自然对数 
+log10 常用对数 
+log2 底为2的对数 
+loglog 双对数刻度图形 
+logm 矩阵对数 
+logspace 对数分度向量 
+lookfor 按关键字搜索M文件 
+lower 转换为小写字母 
+lsqnonlin 解非线性最小二乘问题 
+lu LU分解 
+
+
+
+
+M m 
+mad 平均绝对值偏差 
+magic 魔方阵 
+maple &nb, sp; 运作 Maple格式指令 
+mat2str 把数值数组转换成输入形态串数组 
+material 材料反射模式 
+max 找向量中最大元素 
+mbuild 产生EXE文件编译环境的预设置指令 
+mcc 创建MEX或EXE文件的编译指令 
+mean 求向量元素的平均值 
+median 求中位数 
+menuedit 启动设计用户菜单的交互式编辑工具 
+mesh 网线图 
+meshz 垂帘网线图 
+meshgrid 产生"格点"矩阵 
+methods 获知对指定类定义的所有方法函数 
+mex 产生MEX文件编译环境的预设置指令 
+mfunlis 能被mfun计算的MAPLE经典函数列表 
+mhelp 引出 Maple的在线帮助 
+min 找向量中最小元素 
+mkdir 创建目录 
+mkpp 逐段多项式数据的明晰化 
+mod 模运算 
+more 指令窗中内容的分页显示 
+movie 放映影片动画 
+moviein 影片帧画面的内存预置 
+mtaylor 符号计算多变量Taylor级数展开 
+
+
+
+
+N n 
+ndims 求数组维数 
+NaN 非数（预定义）变量 
+nargchk 输入宗量数验证 
+nargin 函数输入宗量数 
+nargout 函数输出宗量数 
+ndgrid 产生高维格点矩阵 
+newplot 准备新的缺省图、轴 
+nextpow2 取最接近的较大2次幂 
+nnz 矩阵的非零元素总数 
+nonzeros 矩阵的非零元素 
+norm 矩阵或向量范数 
+normcdf 正态分布累计概率密度函数 
+normest 估计矩阵2范数 
+norminv 正态分布逆累计概率密度函数 
+normpdf 正态分布概率密度函数 
+normrnd 正态随机数发生器 
+notebook 启动Matlab和Word的集成环境 
+null 零空间 
+num2str 把非整数数组转换为串 
+numden 获取最小公分母和相应的分子表达式 
+nzmax 指定存放非零元素所需内存 
+
+
+
+
+O o 
+ode1 非Stiff 微分方程变步长解算器 
+ode15s Stiff 微分方程变步长解算器 
+ode23t 适度Stiff 微分方程解算器 
+ode23tb Stiff 微分方程解算器 
+ode45 非Stiff 微分方程变步长解算器 
+odefile ODE 文件模板 
+odeget 获知ODE 选项设置参数 
+odephas2 ODE 输出函数的二维相平面图 
+odephas3 ODE 输出函数的三维相空间图 
+odeplot ODE 输出函数的时间轨迹图 
+odeprint 在Matlab指令窗显示结果 
+odeset 创建或改写 ODE选项构架参数值 
+ones 全1数组 
+optimset 创建或改写优化泛函指令的选项参数值 
+orient 设定图形的排放方式 
+orth 值空间正交化 
+
+
+
+
+P p 
+pack 收集Matlab内存碎块扩大内存 
+pagedlg 调出图形排版对话框 
+patch 创建块对象 
+path 设置Matlab搜索路径的指令 
+pathtool 搜索路径管理器 
+pause 暂停 
+pcode 创建预解译P码文件 
+pcolor 伪彩图 
+peaks Matlab提供的典型三维曲面 
+permute 广义转置 
+pi （预定义变量）圆周率 
+pie 二维饼图 
+pie3 三维饼图 
+pink 粉红色图矩阵 
+pinv 伪逆 
+plot 平面线图 
+plot3 三维线图 
+plotmatrix 矩阵的散点图 
+plotyy 双纵坐标图 
+poissinv 泊松分布逆累计概率分布函数 
+poissrnd 泊松分布随机数发生器 
+pol2cart 极或柱坐标变为直角坐标 
+polar 极坐标图 
+poly 矩阵的特征多项式、根集对应的多项式 
+poly2str 以习惯方式显示多项式 
+poly2sym 双精度多项式系数转变为向量符号多项式 
+polyder 多项式导数 
+polyfit 数据的多项式拟合 
+polyval 计算多项式的值 
+polyvalm 计算矩阵多项式 
+pow2 2的幂 
+ppval 计算分段多项式 
+pretty 以习惯方式显示符号表达式 
+print 打印图形或SIMULINK模型 
+printsys 以习惯方式显示有理分式 
+prism 光谱色图矩阵 
+procread 向MAPLE输送计算程序 
+profile 函数文件性能评估器 
+propedit 图形对象属性编辑器 
+pwd 显示当前工作目录 
+
+
+
+
+Q q 
+quad 低阶法计算数值积分 
+quad8 高阶法计算数值积分(QUADL) 
+quit 推出Matlab 环境 
+quiver 二维方向箭头图 
+quiver3 三维方向箭头图 
+
+
+
+
+R r 
+rand 产生均匀分布随机数 
+randn 产生正态分布随机数 
+randperm 随机置换向量 
+range 样本极差 
+rank 矩阵的秩 
+rats 有理输出 
+rcond 矩阵倒条件数估计 
+real 复数的实部 
+reallog 在实数域内计算自然对数 
+realpow 在实数域内计算乘方 
+realsqrt 在实数域内计算平方根 
+realmax 最大正浮点数 
+realmin 最小正浮点数 
+rectangle 画"长方框" 
+rem 求余数 
+repmat 铺放模块数组 
+reshape 改变数组维数、大小 
+residue 部分分式展开 
+return 返回 
+ribbon 把二维曲线画成三维彩带图 
+rmfield 删去构架的域 
+roots 求多项式的根 
+rose 数扇形图 
+rot90 矩阵旋转90度 
+rotate 指定的原点和方向旋转 
+rotate3d 启动三维图形视角的交互设置功能 
+round 向最近整数圆整 
+rref 简化矩阵为梯形形式 
+rsf2csf 实数块对角阵转为复数特征值对角阵 
+rsums Riemann和 
+
+
+
+
+S s 
+save 把内存变量保存为文件 
+scatter 散点图 
+scatter3 三维散点图 
+sec 正割 
+sech 双曲正割 
+semilogx X轴对数刻度坐标图 
+semilogy Y轴对数刻度坐标图 
+series 串联连接 
+set 设置图形对象属性 
+setfield 设置构架数组的域 
+setstr 将ASCII码转换为字符的旧版指令 
+sign 根据符号取值函数 
+signum 符号计算中的符号取值函数 
+sim 运行SIMULINK模型 
+simget 获取SIMULINK模型设置的仿真参数 
+simple 寻找最短形式的符号解 
+simplify 符号计算中进行简化操作 
+simset 对SIMULINK模型的仿真参数进行设置 
+simulink 启动SIMULINK模块库浏览器 
+sin 正弦 
+sinh 双曲正弦 
+size 矩阵的大小 
+slice 立体切片图 
+solve 求代数方程的符号解 
+spalloc 为非零元素配置内存 
+sparse 创建稀疏矩阵 
+spconvert 把外部数据转换为稀疏矩阵 
+spdiags 稀疏对角阵 
+spfun 求非零元素的函数值 
+sph2cart 球坐标变为直角坐标 
+sphere 产生球面 
+spinmap 色图彩色的周期变化 
+spline 样条插值 
+spones 用1置换非零元素 
+sprandsym 稀疏随机对称阵 
+sprank 结构秩 
+spring 紫黄调春色图 
+sprintf 把格式数据写成串 
+spy 画稀疏结构图 
+sqrt 平方根 
+sqrtm 方根矩阵 
+squeeze 删去大小为1的"孤维" 
+sscanf 按指定格式读串 
+stairs 阶梯图 
+std 标准差 
+stem 二维杆图 
+step 阶跃响应指令 
+str2double 串转换为双精度值 
+str2mat 创建多行串数组 
+str2num 串转换为数 
+strcat 接成长串 
+strcmp 串比较 
+strjust 串对齐 
+strmatch 搜索指定串 
+strncmp 串中前若干字符比较 
+strrep 串替换 
+strtok 寻找第一间隔符前的内容 
+struct 创建构架数组 
+struct2cell 把构架转换为元胞数组 
+strvcat 创建多行串数组 
+sub2ind 多下标转换为单下标 
+subexpr 通过子表达式重写符号对象 
+subplot 创建子图 
+subs 符号计算中的符号变量置换 
+subspace 两子空间夹角 
+sum 元素和 
+summer 绿黄调夏色图 
+superiorto 设定优先级 
+surf 三维着色表面图 
+surface 创建面对象 
+surfc 带等位线的表面图 
+surfl 带光照的三维表面图 
+surfnorm 空间表面的法线 
+svd 奇异值分解 
+svds 求指定的若干奇异值 
+switch-case-otherwise 多分支结构 
+sym2poly 符号多项式转变为双精度多项式系数向量 
+symmmd 对称最小度排序 
+symrcm 反向Cuthill-McKee排序 
+syms 创建多个符号对象 
+
+
+
+
+T t 
+tan 正切 
+tanh 双曲正切 
+taylortool 进行Taylor逼近分析的交互界面 
+text 文字注释 
+tf 创建传递函数对象 
+tic 启动计时器 
+title 图名 
+toc 关闭计时器 
+trapz 梯形法数值积分 
+treelayout 展开树、林 
+treeplot 画树图 
+tril 下三角阵 
+trim 求系统平衡点 
+trimesh 不规则格点网线图 
+trisurf 不规则格点表面图 triu 上三角阵 try-catch 控制流中的Try-catch结构 type 显示M文件 
+
+
+U u 
+uicontextmenu 创建现场菜单 
+uicontrol 创建用户控件 
+uimenu 创建用户菜单 
+unmkpp 逐段多项式数据的反明晰化 
+unwrap 自然态相角 
+upper 转换为大写字母 
+
+
+
+
+V v 
+var 方差 
+varargin 变长度输入宗量 
+varargout 变长度输出宗量 
+vectorize 使串表达式或内联函数适于数组运算 
+ver 版本信息的获取 
+view 三维图形的视角控制 
+voronoi Voronoi多边形 
+vpa 任意精度（符号类）数值 
+
+
+
+
+
+
+W w 
+warning 显示警告信息 
+what 列出当前目录上的文件 
+whatsnew 显示Matlab中 Readme文件的内容 
+which 确定函数、文件的位置 
+while 控制流中的While环结构 
+white 全白色图矩阵 
+whitebg 指定轴的背景色 
+who 列出内存中的变量名 
+whos 列出内存中变量的详细信息 
+winter 蓝绿调冬色图 
+workspace 启动内存浏览器 
+
+
+
+
+X x , Y y , Z z 
+xlabel X轴名 
+xor 或非逻辑 
+yesinput 智能输入指令 
+ylabel Y轴名 
+zeros 全零数组 
+zlabel Z轴名 
+zoom 图形的变焦放大和缩小 
+ztrans 符号计算Z变换
